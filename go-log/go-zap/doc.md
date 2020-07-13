@@ -96,7 +96,7 @@ type Config struct {
 	// Level is the minimum enabled logging level. Note that this is a dynamic
 	// level, so calling Config.Level.SetLevel will atomically change the log
 	// level of all loggers descended from this config.
-  // 支持的最低级别，这是个动态的级别，通过调用Config.Level.SetLevel可以原子性、运行时更改包括所有子logger的级别
+	// 支持的最低级别，这是个动态的级别，通过调用Config.Level.SetLevel可以原子性、运行时更改包括所有子logger的级别
 	Level AtomicLevel `json:"level" yaml:"level"`
 	// Development puts the logger in development mode, which changes the
 	// behavior of DPanicLevel and takes stacktraces more liberally.
@@ -109,20 +109,20 @@ type Config struct {
 	// development and ErrorLevel and above in production.
 	DisableStacktrace bool `json:"disableStacktrace" yaml:"disableStacktrace"`
 	// Sampling sets a sampling policy. A nil SamplingConfig disables sampling.
-  // 没太看明白这个是干啥的
+	// 没太看明白这个是干啥的
 	Sampling *SamplingConfig `json:"sampling" yaml:"sampling"`
 	// Encoding sets the logger's encoding. Valid values are "json" and
 	// "console", as well as any third-party encodings registered via
 	// RegisterEncoder.
-  // 编码方式：json || console
+	// 编码方式：json || console
 	Encoding string `json:"encoding" yaml:"encoding"`
 	// EncoderConfig sets options for the chosen encoder. See
 	// zapcore.EncoderConfig for details.
-  // 编码设置项，这个是后面需要重点看的一个设置项
+	// 编码设置项，这个是后面需要重点看的一个设置项
 	EncoderConfig zapcore.EncoderConfig `json:"encoderConfig" yaml:"encoderConfig"`
 	// OutputPaths is a list of URLs or file paths to write logging output to.
 	// See Open for details.
-  // 日志输出的 urls 或 files，也就是日志写到哪里去
+	// 日志输出的 urls 或 files，也就是日志写到哪里去
 	OutputPaths []string `json:"outputPaths" yaml:"outputPaths"`
 	// ErrorOutputPaths is a list of URLs to write internal logger errors to.
 	// The default is standard error.
@@ -130,10 +130,10 @@ type Config struct {
 	// Note that this setting only affects internal errors; for sample code that
 	// sends error-level logs to a different location from info- and debug-level
 	// logs, see the package-level AdvancedConfiguration example.
-  // 输出logger内部错误的地方
+	// 输出logger内部错误的地方
 	ErrorOutputPaths []string `json:"errorOutputPaths" yaml:"errorOutputPaths"`
 	// InitialFields is a collection of fields to add to the root logger.
-  // 添加到 root logger 中的字段，应该是每条日志都会添加这些字段
+	// 添加到 root logger 中的字段，应该是每条日志都会添加这些字段
 	InitialFields map[string]interface{} `json:"initialFields" yaml:"initialFields"`
 }
 ```
@@ -230,8 +230,8 @@ consoleErrors := zapcore.Lock(os.Stderr)
 type EncoderConfig struct {
 	
 	// 如果某一项为空则写日志时会被忽略，MessageKey不能省略
-  // 注意：如果配置了 LevelKey，则必须同时配置 EncodeLevel，否则可能会报错，其它的 key 也是一样
-  // Set the keys used for each log entry. If any key is empty, that portion
+	// 注意：如果配置了 LevelKey，则必须同时配置 EncodeLevel，否则可能会报错，其它的 key 也是一样
+	// Set the keys used for each log entry. If any key is empty, that portion
 	// of the entry is omitted.
 	MessageKey    string `json:"messageKey" yaml:"messageKey"` 	// 消息体的key
 	LevelKey      string `json:"levelKey" yaml:"levelKey"`			// 消息级别的key
@@ -241,9 +241,9 @@ type EncoderConfig struct {
 	StacktraceKey string `json:"stacktraceKey" yaml:"stacktraceKey"`	// 调用栈的key
 	LineEnding    string `json:"lineEnding" yaml:"lineEnding"`	// 日志结尾的字符
   
-  // 配置常见复杂类型的基本表示，白话点说就是级别、时间等该显示为什么格式。
-  // 这几个成员都是函数类型，可以直接使用zap内置的，也可以定制。
-  // 看函数定义的话，有个 PrimitiveArrayEncoder 接口，见下面的解析
+	// 配置常见复杂类型的基本表示，白话点说就是级别、时间等该显示为什么格式。
+	// 这几个成员都是函数类型，可以直接使用zap内置的，也可以定制。
+	// 看函数定义的话，有个 PrimitiveArrayEncoder 接口，见下面的解析
 	// Configure the primitive representations of common complex types. For
 	// example, some users may want all time.Times serialized as floating-point
 	// seconds since epoch, while others may prefer ISO8601 strings.
@@ -252,7 +252,7 @@ type EncoderConfig struct {
 	EncodeDuration DurationEncoder `json:"durationEncoder" yaml:"durationEncoder"`
 	EncodeCaller   CallerEncoder   `json:"callerEncoder" yaml:"callerEncoder"`
   
-  // 暂时没看明白这个是干嘛的
+	// 暂时没看明白这个是干嘛的
 	// Unlike the other primitive type encoders, EncodeName is optional. The
 	// zero value falls back to FullNameEncoder.
 	EncodeName NameEncoder `json:"nameEncoder" yaml:"nameEncoder"`
