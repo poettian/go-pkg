@@ -13,7 +13,7 @@ func NewLoggerFromConfig() {
 	rawJson := []byte(`{
 		"level": "debug",
 	  	"encoding": "json",
-	  	"outputPaths": ["stdout", "/Users/tianzhiwei/Code/golang/learn-packages/go-log/go-zap/zap.log"],
+	  	"outputPaths": ["stdout", "/Users/tianzhiwei/Code/golang/learn-packages/go_log/go-zap/zap.log"],
 	  	"errorOutputPaths": ["stderr"],
 	  	"initialFields": {"foo": "bar"},
 	  	"encoderConfig": {

@@ -299,6 +299,12 @@ func NewTee(cores ...Core) Core
 ```
 
 ```go
+// zap.New 使用的时候要注意 options 参数
+// 如果要记录 caller 信息，应该这么调用 zap.New(core, zap.AddCaller())
+func New(core zapcore.Core, options ...Option)
+```
+
+```go
 // 最后要注意的是写 field 时，zap 提供的方法：
 // 这些可用的方法在 field.go 中
 logger.Info("failed to fetch URL",
@@ -307,4 +313,6 @@ logger.Info("failed to fetch URL",
   zap.Duration("backoff", time.Second),
 )
 ```
+
+
 

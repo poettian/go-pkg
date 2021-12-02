@@ -1,0 +1,57 @@
+debug: true
+httpPort: 8080
+httpsPort: 443
+sn: 1
+machines: 1
+name: gowebcast
+domain: webcast.eeocn.com
+databases:
+  driver: mysql
+  list:
+    - name: eo_oslive
+      username: docker
+      password: secret
+      port: 3306
+      host: 127.0.0.1
+      type: master
+      maxIdleConnections: 40
+      maxOpenConnections: 100
+    - name: eo_oslive
+      username: docker
+      password: secret
+      port: 3306
+      host: 127.0.0.1
+      type: slave
+      maxIdleConnections: 40
+      maxOpenConnections: 100
+logger:
+  path: ./log/
+  infoFile: gowebcast-info
+  errorFile: gowebcast-error
+redis:
+  masterName: mymaster
+  sentinel1: 10.0.15.141:26379
+  sentinel2: 10.0.15.141:26380
+  sentinel3: 10.0.15.141:26381
+  password:
+  db: 0
+  maxIdle: 50
+  maxActive: 1000
+kafka:
+  webcast:
+    brokers: 10.0.15.131:9092,10.0.15.132:9092,10.0.15.133:9092
+    zb:
+      topic: webcast
+      group: cast-1
+urls:
+  eeo:
+    host: https://static13.eeo.im
+    getJson: /sysshare/custom/schoolDataSubscribe.json
+  course:
+    host: http://course13.eeo.dom:61170
+    getCourseInfo: /classes/get
+  hamster:
+    host: https://hamster13.eeo.im
+    transparent: /hamster/school/transparent
+certFile: /Users/yangsen/zhengshu/server.crt
+keyFile: /Users/yangsen/zhengshu/server.key
