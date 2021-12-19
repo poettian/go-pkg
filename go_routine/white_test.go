@@ -1,4 +1,4 @@
-package go_board
+package go_routine
 
 import (
 	"testing"
@@ -24,4 +24,3 @@ func TestGetRandomToken(t *testing.T) {
 func TestBoard(t *testing.T) {
 	GetCpuNums()
 }
-

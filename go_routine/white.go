@@ -1,4 +1,4 @@
-package go_board
+package go_routine
 
 import (
 	"bufio"
@@ -31,7 +31,7 @@ func CallMeTimer(d int) {
 	fmt.Println(t.Format("2006-01-02 03:04:05"))
 }
 
-func BufioScanner()  {
+func BufioScanner() {
 	input := "abcdefghijkl"
 	scanner := bufio.NewScanner(strings.NewReader(input))
 	split := func(data []byte, atEOF bool) (advance int, token []byte, err error) {
@@ -54,16 +54,16 @@ func BufioScanner()  {
 func ConfigFileExists() bool {
 	configFile := "./config/app_dev.yaml"
 
-	absPath,_ := filepath.Abs(configFile)
+	absPath, _ := filepath.Abs(configFile)
 	fmt.Println(absPath)
 
-	if _,err := os.Stat(configFile);os.IsNotExist(err) {
+	if _, err := os.Stat(configFile); os.IsNotExist(err) {
 		return false
 	}
 	return true
 }
 
-func HandleSignal()  {
+func HandleSignal() {
 	quit := make(chan os.Signal)
 	signal.Notify(quit, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
 	<-quit
@@ -77,7 +77,7 @@ func GetRandomToken(length int) string {
 	return base64.URLEncoding.EncodeToString(r)
 }
 
-func TimerTick()  {
+func TimerTick() {
 	ticker := time.NewTicker(time.Second)
 	go func() {
 		for {
