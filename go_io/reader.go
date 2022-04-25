@@ -1,13 +1,16 @@
 package main
 
 import (
-	"os"
+	"bufio"
+	"fmt"
+	"strings"
 )
 
-func OpenFile(path string) (*os.File, error) {
-	fd, err := os.Open(path)
-	if err != nil {
-		return nil, err
-	}
-	return fd, nil
+func ReadLine1(s string) string {
+	bufioReader := bufio.NewReader(strings.NewReader(s))
+	bytes, err := bufioReader.ReadBytes('\n')
+	fmt.Println(bytes, err)
+	bytes, err = bufioReader.ReadBytes('\n')
+	fmt.Println(bytes, err)
+	return string(bytes)
 }
