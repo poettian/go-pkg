@@ -1,4 +1,4 @@
-package go_routine
+package go_thread
 
 import (
 	"testing"

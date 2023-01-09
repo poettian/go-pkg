@@ -1,4 +1,4 @@
-package go_file
+package go_filesystem
 
 import "testing"
 

@@ -1,12 +1,18 @@
 package main
 
-import (
-	"fmt"
-	"sync"
-)
+type Animal struct {
+	Name string
+}
+
+func (a *Animal) SetName(name string) {
+	a.Name = name
+}
+
+type Cat struct {
+	Animal
+}
 
 func main() {
-	wg := sync.WaitGroup{}
-	wg.Wait()
-	fmt.Println("over")
+	cat := &Cat{}
+	cat.SetName("小咪")
 }

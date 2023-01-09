@@ -7,10 +7,10 @@ import (
 )
 
 func InitConfig() {
-	configPath, _  := os.Getwd()
+	configPath, _ := os.Getwd()
 	viper.SetConfigName("app_dev")
 	viper.SetConfigType("yaml")
-	viper.AddConfigPath(configPath + "/go_viper")
+	viper.AddConfigPath(configPath + "/go-viper")
 	err := viper.ReadInConfig()
 	if err != nil {
 		panic(fmt.Errorf("Fatal error config file: %s \n", err))
