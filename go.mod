@@ -73,5 +73,6 @@ require (
 	golang.org/x/text v0.5.0 // indirect
 	google.golang.org/genproto v0.0.0-20221118155620-16455021b5e6 // indirect
 	gopkg.in/ini.v1 v1.62.0 // indirect
+	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
