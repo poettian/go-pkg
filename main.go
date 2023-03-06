@@ -1,18 +1,11 @@
 package main
 
-type Animal struct {
-	Name string
-}
-
-func (a *Animal) SetName(name string) {
-	a.Name = name
-}
-
-type Cat struct {
-	Animal
-}
+import (
+	"fmt"
+	"io"
+)
 
 func main() {
-	cat := &Cat{}
-	cat.SetName("小咪")
+	var r io.Reader
+	fmt.Println(r == nil)
 }
