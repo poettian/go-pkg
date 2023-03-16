@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
+	"fmt"
 	clientv3 "go.etcd.io/etcd/client/v3"
+	"log"
 	"time"
 )
 
@@ -13,13 +15,26 @@ func main() {
 	})
 	if err != nil {
 		// handle error!
+		log.Fatal(err)
 	}
 	defer cli.Close()
+
+	presp, err := cli.Put(context.TODO(), "foo", "bar1")
+	if err != nil {
+		log.Fatal(err)
+	}
+	_, err = cli.Put(context.TODO(), "foo", "bar2")
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	resp, err := cli.Put(ctx, "sample_key", "sample_value")
+	resp, err := cli.Get(ctx, "foo", clientv3.WithRev(presp.Header.Revision))
 	cancel()
 	if err != nil {
-		// handle error!
+		log.Fatal(err)
 	}
-	// use the response
+	for _, ev := range resp.Kvs {
+		fmt.Printf("%s : %s\n", ev.Key, ev.Value)
+	}
 }
