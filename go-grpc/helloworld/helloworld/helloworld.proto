@@ -14,12 +14,12 @@
 
 syntax = "proto3";
 
-option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";
+package helloworld;
+
+option go_package = "helloworld/helloworld";
 option java_multiple_files = true;
 option java_package = "io.grpc.examples.helloworld";
 option java_outer_classname = "HelloWorldProto";
-
-package helloworld;
 
 // The greeting service definition.
 service Greeter {
@@ -37,4 +37,18 @@ message HelloRequest {
 // The response message containing the greetings
 message HelloReply {
   string message = 1;
+}
+
+message UserReq {
+  int64 id = 1;
+}
+
+message UserRes {
+  int64 id = 1;
+  string name = 2;
+  int32 age = 3;
+}
+
+service User {
+  rpc GetUser (UserReq) returns (UserRes) {}
 }
