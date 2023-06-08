@@ -45,8 +45,17 @@ func (s *server) SayHello(ctx context.Context, in *helloworld.HelloRequest) (*he
 	return &helloworld.HelloReply{Message: "Hello " + in.GetName()}, nil
 }
 
-func (s *server) SayHelloAgain(ctx context.Context, in *helloworld.HelloRequest) (*helloworld.HelloReply, error) {
-	return &helloworld.HelloReply{Message: "Hello again " + in.GetName()}, nil
+type userServer struct {
+	helloworld.UnimplementedUserServer
+}
+
+func (s *userServer) GetUser(ctx context.Context, in *helloworld.UserReq) (*helloworld.UserRes, error) {
+	log.Printf("Received: %v", in.GetId())
+	return &helloworld.UserRes{
+		Id:   1,
+		Name: "tzw",
+		Age:  36,
+	}, nil
 }
 
 func main() {
@@ -57,6 +66,7 @@ func main() {
 	}
 	s := grpc.NewServer()
 	helloworld.RegisterGreeterServer(s, &server{})
+	helloworld.RegisterUserServer(s, &userServer{})
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

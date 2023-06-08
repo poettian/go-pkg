@@ -48,6 +48,7 @@ func main() {
 	}
 	defer conn.Close()
 	c := helloworld.NewGreeterClient(conn)
+	userClient := helloworld.NewUserClient(conn)
 
 	// Contact the server and print out its response.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
@@ -58,9 +59,10 @@ func main() {
 	}
 	log.Printf("Greeting: %s", r.GetMessage())
 
-	r, err = c.SayHelloAgain(ctx, &helloworld.HelloRequest{Name: *name})
+	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
+	userRes, err := userClient.GetUser(ctx, &helloworld.UserReq{Id: 1})
 	if err != nil {
-		log.Fatalf("could not greet: %v", err)
+		log.Fatalf("could not getUser: %v", err)
 	}
-	log.Printf("Greeting: %s", r.GetMessage())
+	log.Printf("User: %v", userRes)
 }
