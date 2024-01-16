@@ -12,7 +12,7 @@ import (
 func main() {
 	//create ServerConfig
 	sc := []constant.ServerConfig{
-		// grpc port -> 9838
+		// grpc1 port -> 9838
 		*constant.NewServerConfig(
 			"nacos.vm.cc",
 			8848,
