@@ -1,0 +1,3 @@
+[submodule "go-zero"]
+	path = go-zero
+	url = https://github.com/poettian/go-zero.git
